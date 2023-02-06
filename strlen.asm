@@ -7,10 +7,10 @@ strlen:
         MOV RBP, RSP
         XOR RCX, RCX                ; Init RCX to 0
         LOOP:
-            CMP BYTE[RDI + RCX], 0
-            JE end
-            INC RCX
-            JMP LOOP
+            CMP BYTE[RDI + RCX], 0  ; Compare bytes to '\0'
+            JE end                  ; Jump to end when condition if true
+            INC RCX                 ; Increment count
+            JMP LOOP                ; Looping
 
 end:
         MOV RAX, RCX                ; RAX = number of character
