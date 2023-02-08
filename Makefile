@@ -16,7 +16,7 @@ SRC     =	strlen.asm	\
 			strstr.asm	\
 			strpbrk.asm	\
 			memcpy.asm	\
-			# memmove.asm	\
+			memmove.asm	\
 
 
 SRC_C	=	main.c

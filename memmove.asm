@@ -10,10 +10,10 @@ memmove:
         JMP stack_loop
 
 stack_loop:
-        CMP R8, 0
-        JE loop
         MOV R9B, [RSI + R8]
         PUSH R9
+        CMP R8, 0
+        JE loop
         DEC R8
         JMP stack_loop
 
