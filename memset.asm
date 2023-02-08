@@ -9,16 +9,10 @@ memset:
         JMP loop
 
 loop:
-        CMP BYTE[RDI + RCX], 0
-        JE null
         CMP RDX, RCX
-        JG switch
-        INC RCX                     ; Increment count
-        JMP loop                    ; looping
-
-switch:
+        JE null
         MOV BYTE[RDI + RCX], SIL
-        INC RCX
+        INC RCX                     ; Increment count
         JMP loop
 
 null:

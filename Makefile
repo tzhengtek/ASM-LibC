@@ -6,17 +6,17 @@
 ##
 
 SRC     =	strlen.asm	\
-			strcmp.asm	\
-			strncmp.asm	\
 			strchr.asm	\
 			strrchr.asm	\
-			strcasecmp.asm	\
-			strpbrk.asm	\
-			strstr.asm	\
 			memset.asm	\
-			memmove.asm	\
+			strcmp.asm	\
+			strcasecmp.asm	\
+			strncmp.asm	\
 			strcspn.asm	\
+			strstr.asm	\
+			strpbrk.asm	\
 			memcpy.asm	\
+			# memmove.asm	\
 
 
 SRC_C	=	main.c
