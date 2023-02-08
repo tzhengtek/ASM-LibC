@@ -6,18 +6,38 @@
 ##
 
 SRC     =	strlen.asm	\
-			strchr.asm
+			strcmp.asm	\
+			strncmp.asm	\
+			strchr.asm	\
+			strrchr.asm	\
+			strcasecmp.asm	\
+			strpbrk.asm	\
+			strstr.asm	\
+			memset.asm	\
+			memmove.asm	\
+			strcspn.asm	\
+			memcpy.asm	\
+
+
+SRC_C	=	main.c
 
 OBJ     =	$(SRC:.asm=.o)
 
+OBJ_C     =	$(SRC_C:.c=.o)
+
 NAME    =	libasm.so
 
-CFLAGS	=	-Wall -Wextra
+CFLAGS	=	-fpic -shared
 
-all: 	$(NAME)
+FLAGS	=	-f elf64
 
-$(NAME):
-	nasm -f elf64 $(SRC)
+NASM	=	nasm
+
+%.o : %.asm
+	$(NASM) $(FLAGS) -o $@ $<
+
+all: 	$(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 clean:
 	$(RM) $(OBJ)
