@@ -18,14 +18,7 @@ SRC     =	strlen.asm	\
 			strcspn.asm	\
 			strncmp.asm	\
 
-
-SRC_C	=	main.c
-
 OBJ     =	$(SRC:.asm=.o)
-
-EXEC	=	a.out
-
-OBJ_C     =	$(SRC_C:.c=.o)
 
 NAME    =	libasm.so
 
@@ -43,7 +36,6 @@ all: 	$(OBJ)
 
 clean:
 	$(RM) $(OBJ)
-	$(RM) $(EXEC)
 
 fclean: clean
 	$(RM) $(NAME)
