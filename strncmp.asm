@@ -11,8 +11,6 @@ strncmp:
         loop:
             CMP RDX, RCX
             JE equal
-            CMP BYTE[RDI + RCX], 0
-            JE equal
             MOV R8B, BYTE[RDI + RCX]
             MOV R9B, BYTE[RSI + RCX]
             CMP R8B, R9B

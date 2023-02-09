@@ -11,12 +11,12 @@ SRC     =	strlen.asm	\
 			memset.asm	\
 			strcmp.asm	\
 			strcasecmp.asm	\
-			strncmp.asm	\
-			strcspn.asm	\
 			strstr.asm	\
-			strpbrk.asm	\
 			memcpy.asm	\
 			memmove.asm	\
+			strpbrk.asm	\
+			strcspn.asm	\
+			strncmp.asm	\
 
 
 SRC_C	=	main.c
