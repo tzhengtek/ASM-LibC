@@ -3,3 +3,6 @@ a.out
 main.c
 *.o
 vgcore*
+*.gcda
+*.gcno
+unit_tests

@@ -10,19 +10,23 @@ SRC     =	strlen.asm	\
 			strrchr.asm	\
 			memset.asm	\
 			strcmp.asm	\
-			strcasecmp.asm	\
-			strstr.asm	\
 			memcpy.asm	\
-			memmove.asm	\
+			strcasecmp.asm	\
 			strpbrk.asm	\
 			strcspn.asm	\
 			strncmp.asm	\
+			strstr.asm	\
+			# memmove.asm	\
+
+SRC_C	=	tests/tests_asm.c
 
 OBJ     =	$(SRC:.asm=.o)
 
 NAME    =	libasm.so
 
-CFLAGS	=	-shared
+CFLAGS	=	 -shared
+
+TEST_NAME	=	unit_tests
 
 FLAGS	=	-f elf64
 
@@ -41,6 +45,11 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+
+tests_run: re
+	$(CC) -o $(TEST_NAME) $(SRC_C) $(LDFLAGS)
+	./$(TEST_NAME)
+	LD_PRELOAD=./$(NAME) ./$(TEST_NAME)
 
 re:	fclean all
 

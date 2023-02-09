@@ -9,52 +9,45 @@ strcasecmp:
         XOR R8, R8
         XOR R9, R9
         loop:
-            CMP BYTE[RDI + RCX], 0
-            JE equal
             MOV R8B, BYTE[RDI + RCX]
             MOV R9B, BYTE[RSI + RCX]
-            CMP R8B, R9B
-            JNE check_case
-            INC RCX
-            JMP loop
+            CMP BYTE[RDI + RCX], 0
+            JE equal
+            JMP check_upper_first_A
 
-check_case:
-        XOR R10B, R8B
-        CMP R10B, R9B
-        JL check_upper_case
-        JG check_lower_case
+check_compare:
+    CMP R8B, R9B
+    JNE error
+    INC RCX
+    JMP loop
 
-check_lower_case:
-        XOR R10B, R8B
-        SUB R10B, 0x20
-        CMP R10B, R9B
-        JNE get_lower_char
-        INC RCX
-        JMP loop
+check_upper_first_A:
+    CMP R8B, 'A'
+    JGE check_upper_first_Z
+    JMP check_upper_second_A
 
-check_upper_case:
-        XOR R10B, R8B
-        ADD R10B, 0x20
-        CMP R10B, R9B
-        JNE get_uppper_char
-        INC RCX
-        JMP loop
+check_upper_first_Z:
+    CMP R8B, 'Z'
+    JLE get_lower_first
+    JMP check_upper_second_A
 
-get_lower_char:
-    MOV R10B, R9B
-    SUB R10B, R8B
-    CMP R10B, -25
-    JGE error
-    ADD R9B, 0x20
-    JMP error
-
-get_uppper_char:
-    MOV R10B, R8B
-    SUB R10B, R9B
-    CMP R10B, -25
-    JGE error
+get_lower_first:
     ADD R8B, 0x20
-    JMP error
+    JMP check_upper_second_A
+
+check_upper_second_A:
+    CMP R9B, 'A'
+    JGE check_upper_second_Z
+    JMP check_compare
+
+check_upper_second_Z:
+    CMP R9B, 'Z'
+    JLE get_lower_second
+    JMP check_compare
+
+get_lower_second:
+    ADD R9B, 0x20
+    JMP check_compare
 
 error:
     SUB R8, R9

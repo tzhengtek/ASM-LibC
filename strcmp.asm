@@ -9,14 +9,21 @@ strcmp:
         XOR R8, R8
         XOR R9, R9
         loop:
-            CMP BYTE[RDI + RCX], 0
-            JE equal
-            MOV R8B, BYTE[RDI + RCX]
-            MOV R9B, BYTE[RSI + RCX]
+            MOV R8B, [RDI + RCX]
+            MOV R9B, [RSI + RCX]
+            CMP R8B, 0
+            JE last_check
+            CMP R9B, 0
+            JE last_check
             CMP R8B, R9B
             JNE error
             INC RCX
             JMP loop
+
+last_check:
+    CMP R8B, R9B
+    JNE error
+    JE equal
 
 equal:
     MOV RAX, 0

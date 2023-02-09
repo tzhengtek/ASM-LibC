@@ -13,7 +13,7 @@ strstr:
 loop:
         ADD RDX, RCX
         CMP BYTE[RDI + RDX], 0
-        JE error
+        JE last_check
         XOR RDX, RDX
         JMP check_loop
 
@@ -38,7 +38,17 @@ found:
         LEAVE
         RET
 
+last_check:
+        CMP BYTE[RSI], 0
+        JE empty
+        JMP error
+
+empty:
+        MOV RAX, RDI
+        LEAVE
+        RET
+
 error:
-        MOV RAX, 0
+        XOR RAX, RAX
         LEAVE
         RET

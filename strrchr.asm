@@ -9,11 +9,21 @@ strrchr:
         XOR R8, R8
         loop:
                 CMP BYTE[RDI + RCX], 0
-                JE endloop
+                JE last_check
                 CMP [RDI + RCX], SIL     ; Compare bytes to parameter
                 JE find
                 INC RCX                     ; Increment count
                 JMP loop                    ; looping
+
+last_check:
+        CMP [RDI + RCX], SIL
+        JE endloop
+        JNE check_index
+
+check_index:
+        CMP R8, 0
+        JE null
+        JNE endloop
 
 find:
         MOV R8, RCX
@@ -21,8 +31,6 @@ find:
         JMP loop
 
 endloop:
-        CMP R8, 0
-        JE null
         ADD RDI, R8
         MOV RAX, RDI
         LEAVE                           ; Epilogue
