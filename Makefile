@@ -22,17 +22,19 @@ OBJ     =	$(SRC:.asm=.o)
 
 NAME    =	libasm.so
 
-CFLAGS	=	-fpic -shared
+CFLAGS	=	-shared
 
 FLAGS	=	-f elf64
 
 NASM	=	nasm
 
+LDFLAGS	=	--coverage -lcriterion
+
 %.o : %.asm
 	$(NASM) $(FLAGS) -o $@ $<
 
 all: 	$(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	ld $(CFLAGS) -o $(NAME) $(OBJ)
 
 clean:
 	$(RM) $(OBJ)
