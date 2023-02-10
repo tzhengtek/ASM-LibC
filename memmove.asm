@@ -6,24 +6,30 @@ memmove:
         PUSH RBP
         MOV RBP, RSP
         XOR RCX, RCX                    ; Init RCX to 0
-        MOV R8, RDX
-        JMP stack_loop
+        XOR R8, R8
+        CMP RDI, RSI
+        JLE loop_forward
+        JG launch_backward
 
-stack_loop:
-        MOV R9B, [RSI + R8]
-        PUSH R9
-        CMP R8, 0
-        JE loop
-        DEC R8
-        JMP stack_loop
+launch_backward:
+        DEC RDX
+        JMP loop_backward
 
-loop:
+loop_backward:
+        MOV R8B, [RSI + RDX]
+        MOV [RDI + RDX], R8B
+        CMP RDX, 0
+        JE end
+        DEC RDX
+        JMP loop_backward
+
+loop_forward:
         CMP RDX, RCX
         JE end
-        POP R10
-        MOV BYTE[RDI + RCX], R10B
+        MOV R8B, [RSI + RCX]
+        MOV [RDI + RCX], R8B
         INC RCX                     ; Increment count
-        JMP loop                    ; looping
+        JMP loop_forward
 
 end:
         MOV RAX, RDI

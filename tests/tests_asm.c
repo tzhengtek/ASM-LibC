@@ -354,6 +354,22 @@ Test(strcasecmp, strcasecmp_empty)
     cr_assert_eq(strcasecmp(s2, s), 0);
 }
 
+Test(strcasecmp, strcasecmp_not_equal3)
+{
+    char s[] = "dazdzadazdgfdg";
+    char s2[] = "DLQPDKSQP";
+
+    cr_assert_eq(strcasecmp(s2, s), 11);
+}
+
+Test(strcasecmp, strcasecmp_not_equal4)
+{
+    char s[] = "dazdzadazdgfdg";
+    char s2[] = "DLQPDKSQP";
+
+    cr_assert_eq(strcasecmp(s, s2), -11);
+}
+
 Test(strpbrk, strpbrk)
 {
     char s[] = "AEIOAEOFAEIZAEIZA";
@@ -447,6 +463,73 @@ Test(strstr, strstr_empty_both)
     char s[] = "";
     char s2[] = "";
 
-    printf("STRSTR : %s\n", strstr(s, s2));
     cr_assert_str_eq(strstr(s, s2), "");
+}
+
+Test(strstr, strstr_not_equal2)
+{
+    char s[] = "dsqdqs";
+    char s2[] = "gfessd";
+
+    cr_assert_eq(strstr(s, s2), NULL);
+}
+
+Test(strstr, strstr_find_equal3)
+{
+    char s[] = "helloworld!";
+    char s2[] = "or";
+
+    cr_assert_str_eq(strstr(s, s2), "orld!");
+}
+
+Test(memmove, memmove)
+{
+    char memmove_string[] = "Faking.";
+    memmove(memmove_string + 1, memmove_string, 6);
+
+    cr_assert_str_eq(memmove_string, "FFaking");
+}
+
+Test(memmove, memmove2)
+{
+    char memmove_string2[] = "Faking.";
+    memmove(memmove_string2, memmove_string2 + 1, 6);
+    cr_assert_str_eq(memmove_string2, "aking..");
+}
+
+Test(memmove, memmove3)
+{
+    char memmove_string2[] = ".";
+    memmove(memmove_string2, memmove_string2 + 1, 6);
+    cr_assert_str_eq(memmove_string2, "");
+}
+
+Test(memmove, memmove4)
+{
+    char s[] = "Bonjourno Paris";
+    char s2[] = "Sheeesh";
+
+    memmove(s, s2, 7);
+    cr_assert_str_eq(s, "Sheeeshno Paris");
+}
+
+Test(memmove, memmove5)
+{
+    char memmove_string2[] = ".dksoqdksoq";
+    memmove(memmove_string2, memmove_string2 + 5, 6);
+    cr_assert_str_eq(memmove_string2, "qdksoqdksoq");
+}
+
+Test(memmove, memmove6)
+{
+    char memmove_string2[] = ".dksoqdksoq";
+    memmove(memmove_string2, memmove_string2 + 5, 6);
+    cr_assert_str_eq(memmove_string2, "qdksoqdksoq");
+}
+
+Test(memmove, memmove7)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2, memmove_string2 + 2, 4);
+    cr_assert_str_eq(memmove_string2, "cohohol");
 }
