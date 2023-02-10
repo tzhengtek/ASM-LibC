@@ -56,6 +56,6 @@ error:
     RET
 
 equal:
-    MOV RAX, 0
+    XOR RAX, RAX
     LEAVE
     RET

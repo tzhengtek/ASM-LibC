@@ -418,6 +418,14 @@ Test(strstr, strstr)
     cr_assert_str_eq(strstr(s, s2), "onjour Worldu");
 }
 
+Test(strstr, strstr_const)
+{
+    const char s[] = "Bonjour Worldu";
+    const char s2[] = "on";
+
+    cr_assert_str_eq(strstr(s, s2), "onjour Worldu");
+}
+
 Test(strstr, strstr_not_found)
 {
     char s[] = "";
