@@ -426,6 +426,14 @@ Test(strstr, strstr_not_found)
     cr_assert_eq(strstr(s, s2), NULL);
 }
 
+Test(strstr, strstr_not_found2)
+{
+    char end = '\0';
+    char s[] = "ahvbjhtestadrr";
+
+    cr_assert_str_eq(strstr(s, &end), "ahvbjhtestadrr");
+}
+
 Test(strstr, strstr_not_found_uppercase)
 {
     char s[] = "aaa";
@@ -532,4 +540,11 @@ Test(memmove, memmove7)
     char memmove_string2[] = "Alcohol";
     memmove(memmove_string2, memmove_string2 + 2, 4);
     cr_assert_str_eq(memmove_string2, "cohohol");
+}
+
+Test(memmove, memmove8)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2, memmove_string2, 4);
+    cr_assert_str_eq(memmove_string2, "Alcohol");
 }
