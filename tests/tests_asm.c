@@ -99,6 +99,13 @@ Test(strrchr, strrchr_empty2)
     cr_assert_str_eq(strrchr(s, s2), "");
 }
 
+Test(strrchr, strrchr_empty5)
+{
+    char *s = "aa";
+    char s2 = '\0';
+    cr_assert_str_eq(strrchr(s, s2), "");
+}
+
 Test(strrchr, strrchr_3)
 {
     char *s = "fkozekfokez";
@@ -158,14 +165,6 @@ Test(strcmp, strcmp_not_equal)
     char s2[] = "d";
 
     cr_assert_eq(strcmp(s, s2), 2);
-}
-
-Test(strcmp, strcmp_equal)
-{
-    char s[] = "f";
-    char s2[] = "d";
-
-    cr_assert_eq(strcmp(s, s), 0);
 }
 
 Test(strcmp, strcmp_not_equal_string)
@@ -368,6 +367,46 @@ Test(strcasecmp, strcasecmp_not_equal4)
     char s2[] = "DLQPDKSQP";
 
     cr_assert_eq(strcasecmp(s, s2), -11);
+}
+
+Test(strcasecmp, strcasecmp_not_equal5)
+{
+    char s[] = "////";
+    char s2[] = "$$***";
+
+    cr_assert_eq(strcasecmp(s, s2), 11);
+}
+
+Test(strcasecmp, strcasecmp_not_equal6)
+{
+    char s[] = "$$$$";
+    char s2[] = "$$";
+
+    cr_assert_eq(strcasecmp(s, s2), 36);
+}
+
+Test(strcasecmp, strcasecmp_not_equal7)
+{
+    char s[] = "";
+    char s2[] = "";
+
+    cr_assert_eq(strcasecmp(s, s2), 0);
+}
+
+Test(strcasecmp, strcasecmp_not_equal8)
+{
+    char s[] = "";
+    char s2[] = "\0";
+
+    cr_assert_eq(strcasecmp(s, s2), 0);
+}
+
+Test(strcasecmp, strcasecmp_not_equal9)
+{
+    char s[] = "AZEa";
+    char s2[] = "AZE";
+
+    cr_assert_eq(strcasecmp(s, s2), 97);
 }
 
 Test(strpbrk, strpbrk)

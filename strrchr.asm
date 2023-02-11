@@ -19,8 +19,14 @@ loop:
 
 last_check:
         CMP [RDI + RCX], SIL            ; Check if the parameter is null
-        JE endloop                      ; If it's, Jump to endloop
+        JE null_parameter               ; If it's, Jump to null_parameter
         JNE check_index                 ; If not, Jump to check_index
+
+null_parameter:
+        ADD RDI, RCX                    ; Move pointer to end of string
+        MOV RAX, RDI                    ; Move RDI in RAX
+        LEAVE                           ; Leave
+        RET                             ; Return
 
 check_index:
         CMP R8, 0                       ; Check if value is found

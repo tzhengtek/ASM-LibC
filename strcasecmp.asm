@@ -8,16 +8,24 @@ strcasecmp:
         XOR RCX, RCX                ; Init RCX to 0
         XOR R8, R8
         XOR R9, R9
-        loop:
-            MOV R8B, BYTE[RDI + RCX]
-            MOV R9B, BYTE[RSI + RCX]
-            CMP BYTE[RDI + RCX], 0
-            JE equal
-            JMP check_upper_first_A
+        JMP loop
+
+loop:
+    MOV R8B, BYTE[RDI + RCX]
+    MOV R9B, BYTE[RSI + RCX]
+    JMP check_upper_first_A
 
 check_compare:
     CMP R8B, R9B
     JNE error
+    CMP R8B, 0
+    JE check_end
+    INC RCX
+    JMP loop
+
+check_end:
+    CMP R9B, 0
+    JE equal
     INC RCX
     JMP loop
 
