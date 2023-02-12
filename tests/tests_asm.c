@@ -595,3 +595,49 @@ Test(memmove, memmove8)
     memmove(memmove_string2, memmove_string2, 4);
     cr_assert_str_eq(memmove_string2, "Alcohol");
 }
+
+Test(memmove, memmove9)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2 + 2, memmove_string2, 3);
+    cr_assert_str_eq(memmove_string2, "AlAlcol");
+}
+
+Test(memmove, memmove10)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2 + 2, memmove_string2, 0);
+    cr_assert_str_eq(memmove_string2, "Alcohol");
+}
+
+Test(memmove, memmove11)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2, "", 0);
+    cr_assert_str_eq(memmove_string2, "Alcohol");
+}
+
+Test(memmove, memmove12)
+{
+    char s[] = "Bonjourno Paris";
+    char s2[] = "Sheeesh";
+
+    memmove(s, s2, 7);
+    cr_assert_str_eq(s, "Sheeeshno Paris");
+}
+
+Test(memmove, memmove13)
+{
+    char s[] = "saaaaaaaaaa";
+
+    memmove(s, s + 4, 7);
+    cr_assert_str_eq(s, "aaaaaaaaaaa");
+}
+
+Test(memmove, memmove14)
+{
+    char s[] = "";
+
+    memmove(s, s + 1, 0);
+    cr_assert_str_eq(s, "");
+}

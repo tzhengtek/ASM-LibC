@@ -9,7 +9,7 @@ memmove:
         XOR R8, R8                      ; Init R8 to 0
         CMP RDI, RSI                    ; Check pointer of Src and Dest
         JLE loop_forward                ; If greater: Jump on loop forward
-        JG launch_backward              ; If lower: Jump on launch backward
+        JMP launch_backward              ; If lower: Jump on launch backward
 
 launch_backward:
         DEC RDX                         ; Decrease by one the n byte
