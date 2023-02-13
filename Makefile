@@ -17,6 +17,8 @@ SRC     =	strlen.asm	\
 			strncmp.asm	\
 			strstr.asm	\
 			memmove.asm	\
+			index.asm	\
+			rindex.asm	\
 
 SRC_C	=	tests/tests_asm.c
 

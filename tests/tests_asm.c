@@ -641,3 +641,109 @@ Test(memmove, memmove14)
     memmove(s, s + 1, 0);
     cr_assert_str_eq(s, "");
 }
+
+
+Test(index, index)
+{
+    char *s = "Hola";
+    char s2 = 'l';
+    cr_assert_str_eq(index(s, s2), "la");
+}
+
+Test(index, index_empty)
+{
+    char *s = "";
+    char s2 = 'l';
+    cr_assert_eq(index(s, s2), NULL);
+}
+
+Test(index, index_empty2)
+{
+    char *s = "";
+    char s2 = '\0';
+    cr_assert_str_eq(index(s, s2), "");
+}
+
+Test(index, index_3)
+{
+    char *s = "fkozekfokez";
+    char s2 = '\0';
+    cr_assert_str_eq(index(s, s2), "");
+}
+
+Test(index, index_4)
+{
+    char *s = "fkoekfokez";
+    char s2 = 'z';
+    cr_assert_str_eq(index(s, s2), "z");
+}
+
+Test(index, index_not_in_string)
+{
+    char *s = "fdddd";
+    char s2 = 'z';
+    cr_assert_eq(index(s, s2), NULL);
+}
+
+Test(index, index_in_string)
+{
+    char *s = "ddfdddd";
+    char s2 = 'd';
+    cr_assert_eq(index(s, s2), s);
+}
+
+Test(rindex, rindex_empty)
+{
+    char *s = "";
+    char s2 = 'l';
+    cr_assert_eq(rindex(s, s2), NULL);
+}
+
+Test(rindex, rindex_empty2)
+{
+    char *s = "";
+    char s2 = '\0';
+    cr_assert_str_eq(rindex(s, s2), "");
+}
+
+Test(rindex, rindex_empty5)
+{
+    char *s = "aa";
+    char s2 = '\0';
+    cr_assert_str_eq(rindex(s, s2), "");
+}
+
+Test(rindex, rindex_3)
+{
+    char *s = "fkozekfokez";
+    char s2 = '\0';
+    cr_assert_str_eq(strchr(s, s2), "");
+}
+
+Test(rindex, rindex_4)
+{
+    char *s = "fkoekfokez";
+    char s2 = 'z';
+    cr_assert_str_eq(rindex(s, s2), "z");
+}
+
+Test(rindex, rindex_not_in_string)
+{
+    char *s = "fdddd";
+    char s2 = 'z';
+    cr_assert_eq(rindex(s, s2), NULL);
+}
+
+Test(rindex, rindex_in_string)
+{
+    char *s = "ddfdddd";
+    char s2 = 'd';
+    cr_assert_str_eq(rindex(s, s2), "d");
+}
+
+Test(rindex, rindex_empty_in_string)
+{
+    char *s = "";
+    char s2 = 'a';
+    cr_assert_eq(rindex(s, s2), NULL);
+}
