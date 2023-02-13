@@ -1,7 +1,9 @@
 BITS 64                                         ; 64-bit mode
 SECTION .text                                   ; Code section
 GLOBAL strchr                                   ; Export 'strchr'
+GLOBAL index                                    ; Export 'index'
 
+index:
 strchr:
         PUSH RBP                                ; Enter
         MOV RBP, RSP
