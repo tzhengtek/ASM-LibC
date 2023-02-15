@@ -8,8 +8,8 @@ memmove:
         XOR RCX, RCX                    ; Init RCX to 0
         XOR R8, R8                      ; Init R8 to 0
         CMP RDI, RSI                    ; Check pointer of Src and Dest
-        JL loop_forward                ; If greater: Jump on loop forward
-        JMP launch_backward              ; If lower: Jump on launch backward
+        JGE launch_backward                ; If greater: Jump on loop forward
+        JMP loop_forward              ; If lower: Jump on launch backward
 
 launch_backward:
         MOV RCX, RDX                    ; Save RDX in RCX
@@ -17,11 +17,11 @@ launch_backward:
         JMP loop_backward               ; Jump on loop backward
 
 loop_backward:
+        CMP RCX, -1                     ; Check if nb byte is -1
+        JE end                          ; End loop
         XOR R8, R8
         MOV R8B, [RSI + RCX]            ; Save in register the nb byte on RSI
         MOV [RDI + RCX], R8B            ; Move the save byte into RDI
-        CMP RCX, 0                      ; Check if nb byte is 0
-        JE end                          ; End loop
         DEC RCX                         ; Decrease by one
         JMP loop_backward               ; Restart the loop
 
