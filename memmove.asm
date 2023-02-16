@@ -8,8 +8,8 @@ memmove:
         XOR RCX, RCX                    ; Init RCX to 0
         XOR R8, R8                      ; Init R8 to 0
         CMP RDI, RSI                    ; Check pointer of Src and Dest
-        JGE launch_backward                ; If greater: Jump on loop forward
-        JMP loop_forward              ; If lower: Jump on launch backward
+        JGE launch_backward             ; If greater: Jump on loop forward
+        JMP loop_forward                ; If lower: Jump on launch backward
 
 launch_backward:
         MOV RCX, RDX                    ; Save RDX in RCX

@@ -642,6 +642,19 @@ Test(memmove, memmove14)
     cr_assert_str_eq(s, "");
 }
 
+Test(memmove, memmove15)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2, "Oui oui", 2);
+    cr_assert_str_eq(memmove_string2, "Oucohol");
+}
+
+Test(memmove, memmove16)
+{
+    char memmove_string2[] = "Alcohol";
+    memmove(memmove_string2, "Oui oui", 0);
+    cr_assert_str_eq(memmove_string2, "Alcohol");
+}
 
 Test(index, index)
 {
